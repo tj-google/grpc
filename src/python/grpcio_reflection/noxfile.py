@@ -41,9 +41,7 @@ def preprocess(session: nox.Session):
     if os.path.isfile(REFLECTION_PROTO):
         shutil.copyfile(
             REFLECTION_PROTO,
-            os.path.join(
-                target_proto_dir, "reflection.proto"
-            ),
+            os.path.join(target_proto_dir, "reflection.proto"),
         )
     if os.path.isfile(LICENSE):
         shutil.copyfile(LICENSE, os.path.join(ROOT_DIR, "LICENSE"))
