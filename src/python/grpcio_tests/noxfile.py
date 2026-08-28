@@ -21,7 +21,7 @@ import sys
 import nox
 
 PYTHON_STEM = os.path.dirname(os.path.abspath(__file__))
-GRPC_STEM = os.path.abspath(PYTHON_STEM + "../../../../")
+GRPC_STEM = os.path.abspath(os.path.join(PYTHON_STEM, "../../.."))
 PYTHON_REL_PATH = os.path.relpath(PYTHON_STEM, start=GRPC_STEM)
 GRPC_PROTO_STEM = os.path.join("src", "proto")
 PROTO_STEM = os.path.join(PYTHON_REL_PATH, "src", "proto")
