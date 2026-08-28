@@ -29,7 +29,7 @@ source tools/internal_ci/helper_scripts/prepare_ccache_symlinks_rc
 # Needed for building binary distribution wheels -- bdist_wheel
 "${PYTHON}" -m pip install --upgrade pip==25.2
 # Pin to a single version to make sure we're building the same artifacts
-"${PYTHON}" -m pip install setuptools==77.0.1 wheel==0.43.0 build==1.3.0 nox
+"${PYTHON}" -m pip install setuptools==77.0.1 wheel==0.43.0 build==1.5.0 nox
 
 if [ "$GRPC_SKIP_PIP_CYTHON_UPGRADE" == "" ]
 then
@@ -317,7 +317,6 @@ then
   ${SETARCH_CMD} "${PYTHON}" -m build --no-isolation \
     "src/python/grpcio_status"
 
-  ${SETARCH_CMD} "${PYTHON}" -m build "src/python/grpcio_status"
   cp -r src/python/grpcio_status/dist/* "$ARTIFACT_DIR"
 
   # Install xds-protos as a dependency of grpcio-csds

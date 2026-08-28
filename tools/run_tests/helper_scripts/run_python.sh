@@ -18,8 +18,21 @@ set -ex
 # change to grpc repo root
 cd "$(dirname "$0")/../../.."
 
-# TODO(jtattermusch): is the $(pwd) prefix actually useful?
-PYTHON="$(pwd)/${1:-py310/bin/python}"
+# Resolve relative paths or virtualenv directories
+PYTHON_INPUT="${1:-py310/bin/python}"
+if [[ "$PYTHON_INPUT" != /* && "$PYTHON_INPUT" != [a-zA-Z]:* ]]; then
+  PYTHON_INPUT="$(pwd)/$PYTHON_INPUT"
+fi
+if [ -d "$PYTHON_INPUT" ]; then
+  if [ -f "$PYTHON_INPUT/Scripts/python.exe" ]; then
+    PYTHON="$PYTHON_INPUT/Scripts/python.exe"
+  else
+    PYTHON="$PYTHON_INPUT/bin/python"
+  fi
+else
+  PYTHON="$PYTHON_INPUT"
+fi
+export PATH="$(dirname "$PYTHON"):$PATH"
 
 ROOT=$(pwd)
 
