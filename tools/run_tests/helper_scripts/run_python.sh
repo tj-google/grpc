@@ -18,12 +18,19 @@ set -ex
 # change to grpc repo root
 cd "$(dirname "$0")/../../.."
 
-# If a venv directory is provided, resolve to bin/python
+# Resolve relative paths or virtualenv directories
 PYTHON_INPUT="${1:-py310/bin/python}"
+if [[ "$PYTHON_INPUT" != /* && "$PYTHON_INPUT" != [a-zA-Z]:* ]]; then
+  PYTHON_INPUT="$(pwd)/$PYTHON_INPUT"
+fi
 if [ -d "$PYTHON_INPUT" ]; then
-  PYTHON="$(pwd)/$PYTHON_INPUT/bin/python"
+  if [ -f "$PYTHON_INPUT/Scripts/python.exe" ]; then
+    PYTHON="$PYTHON_INPUT/Scripts/python.exe"
+  else
+    PYTHON="$PYTHON_INPUT/bin/python"
+  fi
 else
-  PYTHON="$(pwd)/$PYTHON_INPUT"
+  PYTHON="$PYTHON_INPUT"
 fi
 export PATH="$(dirname "$PYTHON"):$PATH"
 

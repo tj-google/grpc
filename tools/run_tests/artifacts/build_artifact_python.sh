@@ -317,7 +317,6 @@ then
   ${SETARCH_CMD} "${PYTHON}" -m build --no-isolation \
     "src/python/grpcio_status"
 
-  ${SETARCH_CMD} "${PYTHON}" -m build "src/python/grpcio_status"
   cp -r src/python/grpcio_status/dist/* "$ARTIFACT_DIR"
 
   # Install xds-protos as a dependency of grpcio-csds
