@@ -16,6 +16,7 @@
 import argparse
 import os
 import shutil
+import sys
 
 import nox
 
@@ -122,7 +123,7 @@ def test_lite(session: nox.Session):
 
     # Run the python interpreter inside the virtual environment to execute the tests
     session.run(
-        "python",
+        sys.executable,
         "-c",
         "import sys; "
         "import tests; "
@@ -144,7 +145,7 @@ def test_py3_only(session: nox.Session):
     session.log("Running test_py3_only for grpcio-tools...")    
 
     session.run(
-        "python",
+        sys.executable,
         "-c",
         "import sys; "
         "import tests; "
@@ -163,7 +164,7 @@ def test_aio(session: nox.Session):
     session.log("Running test_aio for grpcio-tools...")
     
     session.run(
-        "python",
+        sys.executable,
         "-c",
         "import sys; "
         "import tests; "
@@ -226,7 +227,7 @@ def run_interop(session: nox.Session):
 
     if args.client:
         session.run(
-            "python",
+            sys.executable,
             "-c",
             "import sys; "
             "from tests.interop import client; "
@@ -237,7 +238,7 @@ def run_interop(session: nox.Session):
     elif args.server:
         if args.use_asyncio:
             session.run(
-                "python",
+                sys.executable,
                 "-c",
                 "import sys; "
                 "import asyncio; "
@@ -248,7 +249,7 @@ def run_interop(session: nox.Session):
             )
         else:
             session.run(
-                "python",
+                sys.executable,
                 "-c",
                 "import sys; "
                 "from tests.interop import server; "
@@ -294,7 +295,7 @@ def run_fork(session: nox.Session):
     # Any unknown/additional args will be passed along safely
     args, unknown = parser.parse_known_args(session.posargs)
     session.run(
-        "python",
+        sys.executable,
         "-c",
         "import sys; "
         "from tests.fork import client; "

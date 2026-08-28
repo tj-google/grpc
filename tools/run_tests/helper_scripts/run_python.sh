@@ -18,8 +18,14 @@ set -ex
 # change to grpc repo root
 cd "$(dirname "$0")/../../.."
 
-# TODO(jtattermusch): is the $(pwd) prefix actually useful?
-PYTHON="$(pwd)/${1:-py310/bin/python}"
+# If a venv directory is provided, resolve to bin/python
+PYTHON_INPUT="${1:-py310/bin/python}"
+if [ -d "$PYTHON_INPUT" ]; then
+  PYTHON="$(pwd)/$PYTHON_INPUT/bin/python"
+else
+  PYTHON="$(pwd)/$PYTHON_INPUT"
+fi
+export PATH="$(dirname "$PYTHON"):$PATH"
 
 ROOT=$(pwd)
 
