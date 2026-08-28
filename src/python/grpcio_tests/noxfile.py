@@ -142,7 +142,7 @@ def test_py3_only(session: nox.Session):
     This does not include asyncio tests, which are housed in a separate
     directory.
     """
-    session.log("Running test_py3_only for grpcio-tools...")    
+    session.log("Running test_py3_only for grpcio-tools...")
 
     session.run(
         sys.executable,
@@ -162,7 +162,7 @@ def test_aio(session: nox.Session):
     """Command to run aio tests without fetching or building anything."""
 
     session.log("Running test_aio for grpcio-tools...")
-    
+
     session.run(
         sys.executable,
         "-c",
@@ -297,9 +297,7 @@ def run_fork(session: nox.Session):
     session.run(
         sys.executable,
         "-c",
-        "import sys; "
-        "from tests.fork import client; "
-        "client.test_fork()",
+        "import sys; " "from tests.fork import client; " "client.test_fork()",
         *session.posargs,
         env={"GRPC_ENABLE_FORK_SUPPORT": "true"},
     )
