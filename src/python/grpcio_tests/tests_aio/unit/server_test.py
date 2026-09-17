@@ -766,7 +766,9 @@ class TestServer(AioTestBase):
 
         async with aio.insecure_channel("localhost:%d" % port) as channel:
             call = channel.unary_unary(_SIMPLE_UNARY_UNARY)
-            responses = await asyncio.gather(*[call(_REQUEST) for _ in range(20)])
+            responses = await asyncio.gather(
+                *[call(_REQUEST) for _ in range(20)]
+            )
             for response in responses:
                 self.assertEqual(response, _RESPONSE)
 
@@ -786,8 +788,12 @@ class TestServer(AioTestBase):
         server.add_registered_method_handlers(
             "test",
             {
-                "RegisteredOne": grpc.unary_unary_rpc_method_handler(reg_handler_1),
-                "RegisteredTwo": grpc.unary_unary_rpc_method_handler(reg_handler_2),
+                "RegisteredOne": grpc.unary_unary_rpc_method_handler(
+                    reg_handler_1
+                ),
+                "RegisteredTwo": grpc.unary_unary_rpc_method_handler(
+                    reg_handler_2
+                ),
             },
         )
         await server.start()
