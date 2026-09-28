@@ -28,12 +28,8 @@ import nox
 ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
 GRPC_ROOT_ABS_PATH = os.path.join(ROOT_DIR, "../../../")
 GRPC_PROTO_STEM = os.path.join(GRPC_ROOT_ABS_PATH, "src", "proto")
-PROTO_STEM = os.path.join(
-    ROOT_DIR, "src", "proto"
-)
-PYTHON_PROTO_TOP_LEVEL = os.path.join(
-    ROOT_DIR, "src"
-)
+PROTO_STEM = os.path.join(ROOT_DIR, "src", "proto")
+PYTHON_PROTO_TOP_LEVEL = os.path.join(ROOT_DIR, "src")
 
 
 @nox.session(python=False)
