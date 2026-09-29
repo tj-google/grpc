@@ -49,7 +49,8 @@ class _EquivalentNamedTupleInterceptor(aio.ServerInterceptor):
         handler_call_details: grpc.HandlerCallDetails,
     ) -> grpc.RpcMethodHandler:
         equivalent_details = _EquivalentHandlerCallDetails(
-            handler_call_details.method, handler_call_details.invocation_metadata
+            handler_call_details.method,
+            handler_call_details.invocation_metadata,
         )
         return await continuation(equivalent_details)
 
